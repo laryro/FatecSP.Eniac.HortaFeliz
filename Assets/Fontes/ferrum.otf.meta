@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 66c0b21bfc940ff4d97403687b9a053b
+timeCreated: 1495598397
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ferrum
+  fontNames:
+  - Ferrum
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
