@@ -8,8 +8,7 @@ public class GameEngine : MonoBehaviour
 
     //Pontuacao do jogador por disciplina
     private int ptsMatematica, ptsIngles, ptsCiencias, ptsPortugues;
-    private int nivelMatematica,tempoJogoMatematica;
-    private string nomeJogadorAtual;
+    private int nivelMatematica;
 
 
 
@@ -40,7 +39,6 @@ public class GameEngine : MonoBehaviour
         PlayerPrefs.SetInt("ptsMatematica", ptsMatematica);
         PlayerPrefs.SetInt("ptsPortugues", ptsPortugues);
         PlayerPrefs.SetInt("nivelMatematica", nivelMatematica);
-        PlayerPrefs.SetInt("tempoJogoMatematica", tempoJogoMatematica);
         
     }
 

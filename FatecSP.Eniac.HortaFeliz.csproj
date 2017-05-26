@@ -85,15 +85,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\AudioController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\BotaoController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\FundoController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\MatematicaFaseController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\NavegacaoController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\PainelTutorialController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\BackgroundController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ButtonController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MathLevelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\NavigationController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\TutorialPanelController.cs" />
     <Compile Include="Assets\Scripts\GameEngine.cs" />
-    <Compile Include="Assets\Scripts\Models\ItemReciclavel.cs" />
-    <Compile Include="Assets\Scripts\Models\MatematicaFase.cs" />
-    <Compile Include="Assets\Scripts\Models\PainelTutorial.cs" />
+    <Compile Include="Assets\Scripts\Models\MathLevel.cs" />
+    <Compile Include="Assets\Scripts\Models\RecyclableItem.cs" />
+    <Compile Include="Assets\Scripts\Models\TutorialPanel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
