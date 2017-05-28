@@ -279,7 +279,7 @@ public class MathLevelController : MonoBehaviour
         {
             if (GetNivel() == 6 || GetNivel() == 11 || GetNivel() == 21)
             {
-                SceneManager.LoadScene("Matematica_Tutorial");
+                SceneManager.LoadScene("TutorialMath");
             }
             else
             {
