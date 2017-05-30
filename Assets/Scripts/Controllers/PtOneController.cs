@@ -63,9 +63,6 @@ public class PtOneController : MonoBehaviour {
     public void StarGame()
     {
 
-        
-
-
         int id = Random.Range(1, Itens.Count);
 
         Debug.Log(id);
