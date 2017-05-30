@@ -15,7 +15,7 @@ public class BackgroundController : MonoBehaviour {
         float alturaImagem = grafico.sprite.bounds.size.y;
 
         //70% de transparencia, mostrando assim a cor do fundo da camera
-        grafico.color = new Color(1f, 1f, 1f, 0.7f);
+        grafico.color = new Color(1f, 1f, 1f, 0.9f);
         
           //0.5f 'sobra'
           //TODO: FIX
