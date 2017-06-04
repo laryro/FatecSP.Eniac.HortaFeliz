@@ -11,9 +11,9 @@ public class PluralItem {
 
     public string NomePlural { get; set; }
 
-    public string Imagem { get; set; }
+    public Sprite Imagem { get; set; }
 
-    public PluralItem(int id, string nome, string nomep, string imagem)
+    public PluralItem(int id, string nome, string nomep, Sprite imagem)
     {
         Id = id;
 

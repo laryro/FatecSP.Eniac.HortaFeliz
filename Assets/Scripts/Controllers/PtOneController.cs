@@ -1,94 +1,124 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PtOneController : MonoBehaviour {
+public class PtOneController : PtBaseController
+{
+    private List<Sprite> gamePuzzeles = new List<Sprite>();
 
+    public Button proximaPuzzel;
 
-    public List<PluralItem> Itens;
-
-    // Elementos par Mudar
+    private int numberGame = 12;
 
     public Text TextDinamico;
 
-    public Image ImagemPlural;
-
+    [SerializeField]
     public InputField InputField;
 
-    public PluralItem Item;
+    private PluralItem currentItem;
 
 
 
-    // Use this for initialization
-    void Start () {
+    void Start() {
 
         InicializaListaItens();
 
+        Shuffle(Itens);
 
-     //   myImageComponent = GetComponent<Image>();
-
-        StarGame();
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-
-
-	}
-
-
-    private void InicializaListaItens()
-    {
-
-        Itens = new List<PluralItem>();
-
-        Itens.Add(new PluralItem(1, "Alecrim", "Alecrins", ""));
-
-        Itens.Add(new PluralItem(2, "Cebolinha", "Cebolinhas", ""));
-
-        Itens.Add(new PluralItem(3, "Louro", "Louros", ""));
-
-        Itens.Add(new PluralItem(4, "Girassol", "Girassóis", ""));
-
-        Itens.Add(new PluralItem(5, "Joaninha", "Joaninhas", ""));
-
-        Itens.Add(new PluralItem(6, "Folha", "Folhas", ""));
-
+        IniciarJogadaGame();
     }
 
 
-    public void StarGame()
-    {
 
-        
+    public void proximoJogo() {
 
 
-        int id = Random.Range(1, Itens.Count);
+        panelContent.SetActive(true);
 
-        Debug.Log(id);
+        grupoMostrarResultado.SetActive(false);
 
-
-        Item = Itens.Find(x => x.Id == id);
-
-      
-
-        if (Item != null)
+        if(Itens.Any())
+        IniciarJogadaGame();
+        else
         {
-            var texture = Resources.Load<Sprite>("joaninha");
+            SceneManager.LoadScene("GamePortTwo");
 
-            ImagemPlural.sprite = texture;
-
-            TextDinamico.text = Item.Nome;
-
-            InputField.text = Item.NomePlural;
+      //    StartCoroutine(Tempo());
         }
 
+    }
 
+    public void IniciarJogadaGame()
+    {
+        currentItem = Itens.FirstOrDefault();
 
+        if (currentItem != null)
+        {
+            GameObject obj = GameObject.FindGameObjectWithTag("PuzzleButton");
+
+            obj.GetComponent<Button>().image.sprite = currentItem.Imagem;
+
+            TextDinamico.text = currentItem.Nome;
+        }
 
     }
 
+    public void Jogar() {
+
+        numeroJogas++;
+
+        if (currentItem.NomePlural.ToLower() == InputField.text.ToLower())
+        {
+
+            CarregaAcerto();
+
+            ComputarPontos(10 / numeroJogas);
+
+            numeroJogas = 0;
+
+            Itens.Remove(currentItem);
+
+        }
+        else {
+
+            CarregaErro();
+        }
+
+          InputField.text = string.Empty;
+
+    }
+
+
+    IEnumerator Tempo() {
+
+        yield return new WaitForSeconds(1f);
+
+   
+
+    }
+
+
+ 
+
+
+    void Shuffle(List<PluralItem> list)
+    {
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            PluralItem temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+
+        }
+    }
+
+
 }
+
