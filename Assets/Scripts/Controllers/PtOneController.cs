@@ -17,10 +17,14 @@ public class PtOneController : PtBaseController
 
     public Text TextDinamico;
 
+    public Text txtResposta;
+
     [SerializeField]
     public InputField InputField;
 
     private PluralItem currentItem;
+
+    private bool respostaRevelada = false;
 
 
 
@@ -56,6 +60,8 @@ public class PtOneController : PtBaseController
     public void IniciarJogadaGame()
     {
         currentItem = Itens.FirstOrDefault();
+        txtResposta.text = "Ver Resposta";
+        respostaRevelada = false;
 
         if (currentItem != null)
         {
@@ -77,6 +83,7 @@ public class PtOneController : PtBaseController
 
             CarregaAcerto();
 
+            if(!respostaRevelada)
             ComputarPontos(10 / numeroJogas);
 
             numeroJogas = 0;
@@ -118,6 +125,15 @@ public class PtOneController : PtBaseController
 
         }
     }
+
+    public void MostrarResponta()
+    {
+
+        txtResposta.text = currentItem.NomePlural;
+        respostaRevelada = true;
+
+    }
+
 
 
 }
