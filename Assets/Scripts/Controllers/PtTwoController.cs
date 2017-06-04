@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PtTwoController : MonoBehaviour {
-
+public class PtTwoController : PtBaseController
+{
 
     [SerializeField]
     private Sprite bgImage;
@@ -30,6 +30,7 @@ public class PtTwoController : MonoBehaviour {
     private void Start()
     {
         GetButtons();
+        InicializaListaItens();
         AddListeners();
         AddGamePuzzele();
         Shuffle(gamePuzzeles);
@@ -37,13 +38,14 @@ public class PtTwoController : MonoBehaviour {
 
     }
 
-
     public void Awake()
     {
         puzzles = Resources.LoadAll<Sprite>("");
     }
 
     void GetButtons() {
+
+        // aqui terei o vinculo com a tela 1 
 
         GameObject[] objects = GameObject.FindGameObjectsWithTag("PuzzleButton");
 
@@ -77,7 +79,6 @@ public class PtTwoController : MonoBehaviour {
 
     }
 
-
     void AddListeners() {
 
         foreach (var item in btns)
@@ -85,13 +86,13 @@ public class PtTwoController : MonoBehaviour {
             item.onClick.AddListener(() => PickPuzzle());
         }
 
+        txtPontuacao.text = PlayerPrefs.GetInt("ptsPortugues").ToString();
+
     }
-
-
 
     public void PickPuzzle() {
 
-        Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
+      
 
         if (!firstGuess)
         {
@@ -105,6 +106,8 @@ public class PtTwoController : MonoBehaviour {
         }
         else if (!SecondGuess) {
 
+            numeroJogas++;
+
             SecondGuess = true;
 
             secondGuessIndex = int.Parse(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
@@ -114,24 +117,22 @@ public class PtTwoController : MonoBehaviour {
             btns[secondGuessIndex].image.sprite = gamePuzzeles[secondGuessIndex];
 
 
-            gameGuesses++;
-
             StartCoroutine(CheckIfThePuzzlesMatch());
+
+         
 
         }
     }
 
 
-
     IEnumerator CheckIfThePuzzlesMatch() {
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.2f);
 
         if (firstGuessesPuzzle == secondGuessPuzzle)
         {
-
-            yield return new WaitForSeconds(.5f);
-
+          
+            yield return new WaitForSeconds(.2f);
 
             btns[firstGuessesIndex].interactable = false;
             btns[secondGuessIndex].interactable = false;
@@ -139,35 +140,51 @@ public class PtTwoController : MonoBehaviour {
             btns[firstGuessesIndex].image.color = new Color(0, 0, 0, 0);
             btns[secondGuessIndex].image.color = new Color(0, 0, 0, 0);
 
+            ComputarPontos(10 / numeroJogas);
 
-            CheckIfTheGameFinished();
+            numeroJogas = 0;
 
         }
         else {
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.2f);
 
             btns[firstGuessesIndex].image.sprite = bgImage;
 
             btns[secondGuessIndex].image.sprite = bgImage;
 
+
         }
 
-        yield return new WaitForSeconds(.5f);
-
         firstGuess = SecondGuess = false;
+
+        if (btns[firstGuessesIndex].image.color == new Color(0, 0, 0, 0) && btns[secondGuessIndex].image.color == new Color(0, 0, 0, 0))
+        {
+            CarregaAcerto(true, firstGuessesPuzzle);
+
+            countCorrectGuesses++;
+
+        }
+        else
+        {
+            CarregaErro(true);
+        }
+
 
     }
 
     void CheckIfTheGameFinished() {
 
-        countCorrectGuesses++;
-
+        
         if (countCorrectGuesses == gameGuesses) {
-            Debug.Log("Game Fim");
 
-            Debug.Log(gameGuesses);
+            if (PlayerPrefs.GetInt("pontuacaoMaximaPortugues") < PlayerPrefs.GetInt("ptsPortugues"))
+            {
+                grupoHighScore.SetActive(true);
 
+            }
+            else { EncerrarPartida();  }
+          
 
         }
 
@@ -175,19 +192,15 @@ public class PtTwoController : MonoBehaviour {
     }
 
 
-    void Shuffle(List<Sprite> list ) {
+    public void ProximoJogo()
+    {
 
-        for (int i = 0; i < list.Count; i++)
-        {
-            Sprite temp = list[i];
-            int randomIndex = Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+        panelContent.SetActive(true);
 
-        }
+        grupoMostrarResultado.SetActive(false);
+
+        CheckIfTheGameFinished();
+
+
     }
-
-
-
-
 }
