@@ -11,7 +11,7 @@ public class PlantVase : PlantVaseController {
     {
         base.Start();
         seed = new Seed();
-        needsPanel = gameObject.transform.GetChild(0).gameObject;
+        needsPanel = gameObject.transform.Find("NeedsList").gameObject;
         ShowNeeds();
     }
 
@@ -22,7 +22,7 @@ public class PlantVase : PlantVaseController {
 
     public void CheckNeeds()
     {
-        Debug.Log("Checando necessidades");
+        
     }
     private void ShowNeeds()
     {
@@ -30,7 +30,20 @@ public class PlantVase : PlantVaseController {
         Seed.Needs[] needs = seed.GetNeeds().ToArray();
         for (int i = 0; i < needs.Length; i++)
         {
-            
+			Need needObject = this.gameObject.AddComponent<Need>() as Need;
+			needObject.Sprite = Resources.Load("Images/Colorful/gota") as Sprite;
+
+			Debug.Log (needObject.Sprite);
+
+//			Need needObject =  Need ();
+//			needObject.type = needs [i];
+//			needObject.Sprite = Resources.Load("Images/Colorful/gota") as Sprite;
+//			Debug.Log (needObject.Sprite );
+//
+//			GameObject need = (GameObject)Instantiate (needObject, transform.position, transform.rotation);
+//			Debug.Log (need);
+//			Need need = Instantiate (needObject, transform.position, transform.rotation);
+//			Debug.Log (need.transform);
         }
     }
 }

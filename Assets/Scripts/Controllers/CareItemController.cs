@@ -20,7 +20,6 @@ public class CareItemController : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(positionToReturnTo.position);
         draggableShadow.transform.position = eventData.position;
     }
     public void OnEndDrag(PointerEventData eventData)
