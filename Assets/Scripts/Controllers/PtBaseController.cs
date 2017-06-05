@@ -54,7 +54,6 @@ public class PtBaseController : MonoBehaviour
 
         Itens.Add(new PluralItem(10, "Pá", "Pás", Resources.Load<Sprite>("pa")));
 
-
         txtRecordista.text = "Recordista: " + PlayerPrefs.GetString("nomeVencedorPortugues") + " : " + PlayerPrefs.GetInt("pontuacaoMaximaPortugues") + " PTS";
 
     }

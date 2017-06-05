@@ -9,9 +9,7 @@ public class PtOneController : PtBaseController
 {
     private List<Sprite> gamePuzzeles = new List<Sprite>();
 
-    public Button proximaPuzzel;
-
-    private int numberGame = 12;
+    public Button proximaPuzzel, button;
 
     public Text TextDinamico;
 
@@ -39,7 +37,6 @@ public class PtOneController : PtBaseController
 
     public void proximoJogo() {
 
-
         panelContent.SetActive(true);
 
         grupoMostrarResultado.SetActive(false);
@@ -49,23 +46,21 @@ public class PtOneController : PtBaseController
         else
         {
             SceneManager.LoadScene("GamePortTwo");
-
-      //    StartCoroutine(Tempo());
         }
 
     }
 
     public void IniciarJogadaGame()
     {
-        currentItem = Itens.FirstOrDefault();
+        currentItem = Itens.FirstOrDefault() ?? null ;
+
         txtResposta.text = "Ver Resposta";
+
         respostaRevelada = false;
 
         if (currentItem != null)
         {
-            GameObject obj = GameObject.FindGameObjectWithTag("PuzzleButton");
-
-            obj.GetComponent<Button>().image.sprite = currentItem.Imagem;
+            button.image.sprite = currentItem.Imagem;
 
             TextDinamico.text = currentItem.Nome;
         }
