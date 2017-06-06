@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +11,9 @@ public class Seed
     public Seed()
     {
         needs = new List<Needs>();
-
-        this.AddNeed(Needs.NEED_SUN);
-        this.AddNeed(Needs.NEED_SUN);
-        this.AddNeed(Needs.NEED_CUT);
-        this.AddNeed(Needs.NEED_WATER);
+        for( int i = 0; i < 4; i++){
+            AddNeed((Needs)Random.Range(0, 4));
+        }
     }
 
     public void AddNeed(Needs newNeed)
