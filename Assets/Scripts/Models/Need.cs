@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Need : MonoBehaviour{
-	private Sprite sprite;
 	public Seed.Needs type;
 
-	public Sprite Sprite{ set; get; }
+	public void SetSprite( Sprite sprite ) {
+		this.GetComponent<Image>().sprite = sprite;
+	}
 }

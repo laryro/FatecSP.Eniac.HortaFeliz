@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlantVase : PlantVaseController {
     private Seed seed;
     private GameObject needsPanel;
-    private List<GameObject> needsList;
+
+	public List<GameObject> needsList;
 
     public new void Start()
     {
@@ -30,20 +31,13 @@ public class PlantVase : PlantVaseController {
         Seed.Needs[] needs = seed.GetNeeds().ToArray();
         for (int i = 0; i < needs.Length; i++)
         {
-			Need needObject = this.gameObject.AddComponent<Need>() as Need;
-			needObject.Sprite = Resources.Load("Images/Colorful/gota") as Sprite;
+			GameObject nu = (GameObject) Instantiate(needsList[i], needsPanel.transform.position, needsPanel.transform.rotation);
 
-			Debug.Log (needObject.Sprite);
+			nu.GetComponent<Need>().SetSprite(Resources.Load<Sprite>("Science/NEED_WATER") );
+			nu.transform.SetParent( needsPanel.transform );
 
-//			Need needObject =  Need ();
-//			needObject.type = needs [i];
-//			needObject.Sprite = Resources.Load("Images/Colorful/gota") as Sprite;
-//			Debug.Log (needObject.Sprite );
-//
-//			GameObject need = (GameObject)Instantiate (needObject, transform.position, transform.rotation);
-//			Debug.Log (need);
-//			Need need = Instantiate (needObject, transform.position, transform.rotation);
-//			Debug.Log (need.transform);
         }
+		Debug.Log( needsPanel.transform.childCount );
+
     }
 }
