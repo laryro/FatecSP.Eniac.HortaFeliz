@@ -11,9 +11,9 @@ public class PlantVase : PlantVaseController {
 
     public new void Start(){
         base.Start();
-        seed = new Seed();
         needsPanel = gameObject.transform.Find("NeedsList").gameObject;
 
+        seed = new Seed();
         ShowNeeds();
     }
 
@@ -39,7 +39,7 @@ public class PlantVase : PlantVaseController {
         // Checa se todos as necessidades foram preenchidas, remove e adiciona outro vaso no lugar
         if ( RemainingNeeds() == 0)
         {
-            Debug.Log("Preencheu todas as necessidades!");
+            RenewVase();
         }
     }
 
@@ -66,5 +66,16 @@ public class PlantVase : PlantVaseController {
             nu.GetComponent<Need>().SetSprite(Resources.Load<Sprite>("Science/" + needs[i].ToString()) );
 			nu.transform.SetParent( needsPanel.transform );
         }
+    }
+
+    private void RenewVase()
+    {
+        Debug.Log("Renovando o vaso, já que ele foi preenchido")
+        for( int i = needsPanel.transform.childCount - 1; i >= 0 ; i--){
+            //needsPanel.transform.GetChild(i).gameObject.
+        }
+
+        //seed = new Seed();
+        //ShowNeeds();
     }
 }
