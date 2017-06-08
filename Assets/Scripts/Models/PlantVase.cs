@@ -70,12 +70,11 @@ public class PlantVase : PlantVaseController {
 
     private void RenewVase()
     {
-        Debug.Log("Renovando o vaso, já que ele foi preenchido")
         for( int i = needsPanel.transform.childCount - 1; i >= 0 ; i--){
-            //needsPanel.transform.GetChild(i).gameObject.
+            Destroy(needsPanel.transform.GetChild(i).gameObject);
         }
 
-        //seed = new Seed();
-        //ShowNeeds();
+        seed = new Seed();
+        ShowNeeds();
     }
 }
