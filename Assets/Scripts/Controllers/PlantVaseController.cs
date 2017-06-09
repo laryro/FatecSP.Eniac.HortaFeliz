@@ -10,16 +10,12 @@ public class PlantVaseController : MonoBehaviour, IDropHandler
     public void Start()
     {
         plantVase = gameObject.GetComponent<PlantVase>();
-        Debug.Log(plantVase);
     }
     public void OnDrop(PointerEventData eventData){
-        //Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
-
-        plantVase.CheckNeeds();
         CareItem c = eventData.pointerDrag.GetComponent<CareItem>();
         if( c != null)
         {
-            Debug.Log(c.fullfills);
+            plantVase.CheckNeeds(c.fullfills);
         }
     }
 }
