@@ -171,11 +171,34 @@ public class PtTwoController : PtBaseController
         }
 
 
+        StartCoroutine(Tempo());
+
     }
+
+
+    IEnumerator Tempo()
+    {
+        yield return new WaitForSeconds(2f);
+
+        ProximoJogo();
+
+    }
+
+    IEnumerator TempoEncerar()
+    {
+        yield return new WaitForSeconds(4f);
+
+        EncerrarPartida();
+
+    }
+
+
+
+
 
     void CheckIfTheGameFinished() {
 
-        
+
         if (countCorrectGuesses == gameGuesses) {
 
             if (PlayerPrefs.GetInt("pontuacaoMaximaPortugues") < PlayerPrefs.GetInt("ptsPortugues"))
@@ -183,7 +206,14 @@ public class PtTwoController : PtBaseController
                 grupoHighScore.SetActive(true);
 
             }
-            else { EncerrarPartida();  }
+            else {
+
+                CarregaFimGame();
+
+                StartCoroutine(TempoEncerar());
+             
+
+            }
           
 
         }

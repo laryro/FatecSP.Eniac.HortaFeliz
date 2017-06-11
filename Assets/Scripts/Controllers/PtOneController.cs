@@ -55,8 +55,22 @@ public class PtOneController : PtBaseController
         IniciarJogadaGame();
         else
         {
-            SceneManager.LoadScene("GamePortTwo");
+
+            CarregaMensagemMundacaJogo();
+
+            StartCoroutine(novaFase());
+
+           
         }
+
+    }
+
+
+    IEnumerator novaFase()
+    {
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.LoadScene("GamePortTwo");
 
     }
 
@@ -97,8 +111,6 @@ public class PtOneController : PtBaseController
         else {
 
             CarregaErro();
-
-           
 
         }
 
