@@ -1,16 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private int actualScore = 0;
+    private int oldScore = 0;
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Update()
+    {
+        if( oldScore != actualScore)
+        {
+            if (actualScore < 0) actualScore = 0;
+            this.gameObject.transform.GetChild(1).GetComponent<Text>().text = actualScore.ToString("D5");
+            oldScore = actualScore;
+        }
+    }
+    public void AddPoints(int val)
+    {
+        actualScore += val;
+    }
+    public void SubtractPoints(int val)
+    {
+        actualScore -= 5 * val;
+    }
 }

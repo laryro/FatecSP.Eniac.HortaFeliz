@@ -6,12 +6,16 @@ public class PlantVase : PlantVaseController {
     private Seed seed;
     private GameObject needsPanel;
     private bool rightNeed;
+    private GameObject score;
+    private int errorMod = 1;
 
-	public List<GameObject> needsList;
+    public List<GameObject> needsList;
 
     public new void Start(){
         base.Start();
         needsPanel = gameObject.transform.Find("NeedsList").gameObject;
+
+        score = GameObject.Find("ScoreBlock").gameObject;
 
         seed = new Seed();
         ShowNeeds();
@@ -26,6 +30,8 @@ public class PlantVase : PlantVaseController {
                 need.SetFullfilled();
                 rightNeed = true;
                 // Soma pontos
+                score.GetComponent<ScoreController>().AddPoints(10);
+                errorMod = 1;
                 break;
             }
         }
@@ -33,12 +39,14 @@ public class PlantVase : PlantVaseController {
         if( !rightNeed)
         {
             // Desconta pontos
-            Debug.Log("Errou, vai descontar pontos.");
+            score.GetComponent<ScoreController>().SubtractPoints(errorMod);
+            errorMod++;
         }
 
         // Checa se todos as necessidades foram preenchidas, remove e adiciona outro vaso no lugar
         if ( RemainingNeeds() == 0)
         {
+            score.GetComponent<ScoreController>().AddPoints(100);
             RenewVase();
         }
     }
