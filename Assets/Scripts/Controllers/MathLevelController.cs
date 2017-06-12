@@ -64,6 +64,15 @@ public class MathLevelController : MonoBehaviour
         listaItens.Add(new RecyclableItem("Organico", VLR_ORGANICO, rodapeOrganico, cestaOrganico, containerOrganico, txtQtdOrganico));
     }
 
+
+    void OnGUI()
+    {
+        if (inputResultado.isFocused && (!string.IsNullOrEmpty(inputResultado.text)) && Input.GetKey(KeyCode.Return))
+        {
+            MostrarResultado();
+        }
+    }
+
     /// <summary>
     /// Tela inical do jogo
     /// </summary>
@@ -196,7 +205,7 @@ public class MathLevelController : MonoBehaviour
             Invoke("AguardarResposta", 1.5f);
         }
 
-    } 
+    }
 
     /// <summary>
     /// Mostra Input de texto para interacaos
@@ -269,7 +278,7 @@ public class MathLevelController : MonoBehaviour
         proximaRodada.tag = "Perdeu";
         txtBtnProximaRodada.text = "Encerrar";
     }
-    
+
     /// <summary>
     /// Determina a proxima rodada em funcao do resultado 
     /// </summary>
