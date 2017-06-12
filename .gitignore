@@ -23,6 +23,8 @@ ExportedObj
 .booproj
 .svd
 .pdb
+*.sln
+*.userprefs
 
 # Unity3D generated meta files
 .pidb.meta
