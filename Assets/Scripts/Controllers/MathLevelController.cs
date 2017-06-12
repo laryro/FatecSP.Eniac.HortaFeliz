@@ -186,7 +186,7 @@ public class MathLevelController : MonoBehaviour
                 GetComponent<AudioSource>().PlayOneShot(somOrganico);
                 break;
         }
-
+        //Retira o item tocado, da fila
         listaSelecionados.RemoveAt(0);
 
 

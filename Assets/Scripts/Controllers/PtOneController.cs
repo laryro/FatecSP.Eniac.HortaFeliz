@@ -23,6 +23,14 @@ public class PtOneController : PtBaseController
     private bool respostaRevelada = false;
 
 
+    void OnGUI()
+    {
+        if (InputField.isFocused && (!string.IsNullOrEmpty(InputField.text)) && Input.GetKey(KeyCode.Return))
+        {
+            Jogar();
+        }
+    }
+
 
     void Start() {
 
@@ -31,6 +39,8 @@ public class PtOneController : PtBaseController
         Shuffle(Itens);
 
         IniciarJogadaGame();
+
+
     }
 
 
@@ -45,8 +55,22 @@ public class PtOneController : PtBaseController
         IniciarJogadaGame();
         else
         {
-            SceneManager.LoadScene("GamePortTwo");
+
+            CarregaMensagemMundacaJogo();
+
+            StartCoroutine(novaFase());
+
+           
         }
+
+    }
+
+
+    IEnumerator novaFase()
+    {
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.LoadScene("GamePortTwo");
 
     }
 
@@ -87,23 +111,23 @@ public class PtOneController : PtBaseController
         else {
 
             CarregaErro();
+
         }
 
-          InputField.text = string.Empty;
+
+        InputField.text = string.Empty;
+
+        StartCoroutine(Tempo());
 
     }
 
+    IEnumerator Tempo()
+    {
+        yield return new WaitForSeconds(2f);
 
-    IEnumerator Tempo() {
-
-        yield return new WaitForSeconds(1f);
-
-   
+        proximoJogo();
 
     }
-
-
- 
 
 
     void Shuffle(List<PluralItem> list)

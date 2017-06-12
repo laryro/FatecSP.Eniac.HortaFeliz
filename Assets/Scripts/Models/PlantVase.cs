@@ -6,14 +6,18 @@ public class PlantVase : PlantVaseController {
     private Seed seed;
     private GameObject needsPanel;
     private bool rightNeed;
+    private GameObject score;
+    private int errorMod = 1;
 
-	public List<GameObject> needsList;
+    public List<GameObject> needsList;
 
     public new void Start(){
         base.Start();
-        seed = new Seed();
         needsPanel = gameObject.transform.Find("NeedsList").gameObject;
 
+        score = GameObject.Find("ScoreBlock").gameObject;
+
+        seed = new Seed();
         ShowNeeds();
     }
 
@@ -26,6 +30,8 @@ public class PlantVase : PlantVaseController {
                 need.SetFullfilled();
                 rightNeed = true;
                 // Soma pontos
+                score.GetComponent<ScoreController>().AddPoints(10);
+                errorMod = 1;
                 break;
             }
         }
@@ -33,13 +39,15 @@ public class PlantVase : PlantVaseController {
         if( !rightNeed)
         {
             // Desconta pontos
-            Debug.Log("Errou, vai descontar pontos.");
+            score.GetComponent<ScoreController>().SubtractPoints(errorMod);
+            errorMod++;
         }
 
         // Checa se todos as necessidades foram preenchidas, remove e adiciona outro vaso no lugar
         if ( RemainingNeeds() == 0)
         {
-            Debug.Log("Preencheu todas as necessidades!");
+            score.GetComponent<ScoreController>().AddPoints(100);
+            RenewVase();
         }
     }
 
@@ -66,5 +74,15 @@ public class PlantVase : PlantVaseController {
             nu.GetComponent<Need>().SetSprite(Resources.Load<Sprite>("Science/" + needs[i].ToString()) );
 			nu.transform.SetParent( needsPanel.transform );
         }
+    }
+
+    private void RenewVase()
+    {
+        for( int i = needsPanel.transform.childCount - 1; i >= 0 ; i--){
+            Destroy(needsPanel.transform.GetChild(i).gameObject);
+        }
+
+        seed = new Seed();
+        ShowNeeds();
     }
 }

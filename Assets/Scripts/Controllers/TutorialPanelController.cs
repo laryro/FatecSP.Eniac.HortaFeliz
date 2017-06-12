@@ -74,13 +74,12 @@ public class TutorialPanelController : MonoBehaviour
             case 6:
                 painel.TextoDescritivo = @"Você desbloqueou um novo item: Vidro.
 
-O vidro é um dos produtos mais utilizados nas tarefas do dia-a-dia.
-Ao ser descartado por pessoas e empresas, pode passar por um processo de reciclagem que garante seu reaproveitamento na producao do vidro reciclado.
-
 Tipos de vidro recicláveis : 
+
 Garrafas de sucos, refrigerantes, cervejas e outros tipos de bebidas;
 Potes de alimentos, Cacos de vidros, Frascos de remédios
-Preste atencao  no som do Vidro:
+
+Preste atenção  no som do Vidro:
 			";
                 painel.MostraVidro = true;
                 GetComponent<AudioSource>().PlayOneShot(somDescoberta);
@@ -88,7 +87,6 @@ Preste atencao  no som do Vidro:
             //Tutorial Metal
             case 11:
                 painel.TextoDescritivo = @"Você desbloqueou um novo item: Metal.
-O metal é um dos produtos mais utilizados nas tarefas do dia-a-dia. Encontramos embalagens de metais, fios e outros produtos metálicos em diversos produtos.
 
 Tipos de metais recicláveis : Latas de alumínio (refrigerante, cerveja, etc.) e aco (latas de sardinha, molhos, óleo, etc.
 
@@ -98,12 +96,12 @@ Preste atencao  no som do Metal:</b>
                 painel.MostraMetal = true;
                 GetComponent<AudioSource>().PlayOneShot(somDescoberta);
                 break;
-            case 20:
+            case 21:
                 painel.TextoDescritivo = @"Você desbloqueou um novo item: Lixo Orgânico.
 Lixo orgânico é todo resíduo de origem vegetal ou animal, ou seja, todo lixo originário de um ser vivo. 
-Este tipo de lixo é produzido nas residências, escolas, empresas e pela natureza.
  
-Podemos citar como exemplos de lixo orgânico: restos de alimentos orgânicos (carnes, vegetais, frutos, cascas de ovos), papel, madeira, ossos, sementes, etc.
+Podemos citar como exemplos de lixo orgânico: restos de alimentos orgânicos (carnes, vegetais, frutos, cascas de ovos), ossos, sementes, etc.
+
 A Partir de agora o jogo ficará muito mais difícil! 
 				Preste atencao no som do Lixo Orgânico:
 			";
@@ -115,8 +113,9 @@ A Partir de agora o jogo ficará muito mais difícil!
 Você ouvirá uma sequência de sons dos materiais recicláveis e cada um deles equivale a um número. 
 Após ouvir toda a sequência, você deverá responder qual é o resultado da soma correspondente aos sons ouvidos.
 Ex: Som de plastico = 1  , Som de papel = 3.
-Ao ouvir uma sequência com os dois sons, você deverá colocar o resultado (1+3) = <b>4</b>
-Aproveite esse momento e ouca bem cada um dos sons antes de comecar o jogo.
+
+Ao ouvir uma sequência com os dois sons, você deverá colocar o resultado: <b>4</b>
+Aproveite esse momento e ouça bem cada um dos sons antes de comecar o jogo.
     Boa Sorte!
 ";
                 painel.MostraMetal = painel.MostraOrganico = painel.MostraPapel = painel.MostraVidro = painel.MostraPlastico = true;

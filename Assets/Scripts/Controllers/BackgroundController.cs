@@ -9,13 +9,13 @@ public class BackgroundController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        SpriteRenderer grafico = GetComponent<SpriteRenderer>();
+        SpriteRenderer graph = GetComponent<SpriteRenderer>();
 
-        float larguraImagem = grafico.sprite.bounds.size.x;
-        float alturaImagem = grafico.sprite.bounds.size.y;
+        float larguraImagem = graph.sprite.bounds.size.x;
+        float alturaImagem = graph.sprite.bounds.size.y;
 
         //70% de transparencia, mostrando assim a cor do fundo da camera
-        grafico.color = new Color(1f, 1f, 1f, 0.9f);
+        graph.color = new Color(1f, 1f, 1f, 0.9f);
         
           //0.5f 'sobra'
           //TODO: FIX

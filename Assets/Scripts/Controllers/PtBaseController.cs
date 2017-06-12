@@ -32,6 +32,10 @@ public class PtBaseController : MonoBehaviour
 
     const string mensagemAcerto = "Parabéns !!!! \n Você Acertou !!!!";
 
+    const string mesagem = "Proximo Nivel \n Agora, brinque com o Jogo da Memoria.";
+
+    const string mensagemFim = "Parabéns !!! \n Fim de Jogo Pontuação: ";
+
     public void InicializaListaItens()
     {
         Itens.Add(new PluralItem(1, "Semente", "Sementes", Resources.Load<Sprite>("semente")));
@@ -100,6 +104,25 @@ public class PtBaseController : MonoBehaviour
         mostraResultadoPainel.color = new Color(1f, 0.5f, 0.5f);
         txtMensagemResultado.text = mensagemErro;
         GetComponent<AudioSource>().PlayOneShot(somErro);
+
+    }
+
+
+    public void CarregaMensagemMundacaJogo() {
+
+        panelContent.SetActive(false);
+        grupoMostrarResultado.SetActive(true);
+        mostraResultadoPainel.color = new Color(0.16f, 0.77f, 0.16f);
+        txtMensagemResultado.text = mesagem;
+
+    }
+
+    public void CarregaFimGame() {
+
+        panelContent.SetActive(false);
+        grupoMostrarResultado.SetActive(true);
+        mostraResultadoPainel.color = new Color(0.16f, 0.77f, 0.16f);
+        txtMensagemResultado.text = mensagemFim + PlayerPrefs.GetInt("ptsPortugues").ToString();
 
     }
 
