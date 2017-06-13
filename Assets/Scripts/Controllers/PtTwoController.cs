@@ -167,7 +167,7 @@ public class PtTwoController : PtBaseController
         }
         else
         {
-            CarregaErro(true);
+           // CarregaErro(true);
         }
 
 
