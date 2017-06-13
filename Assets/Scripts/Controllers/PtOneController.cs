@@ -36,22 +36,14 @@ public class PtOneController : PtBaseController
 
         InicializaListaItens();
 
-        Shuffle();
+        Shuffle(Itens);
 
         IniciarJogadaGame();
 
-        focusInput();
 
     }
 
-    private void focusInput() {
-        #region Focus
-        InputField.Select();
 
-        InputField.ActivateInputField();
-        #endregion
-
-    }
 
     public void proximoJogo() {
 
@@ -59,11 +51,8 @@ public class PtOneController : PtBaseController
 
         grupoMostrarResultado.SetActive(false);
 
-        if (Itens.Any()) {
-            
-                IniciarJogadaGame();
-                focusInput();
-            }
+        if(Itens.Any())
+        IniciarJogadaGame();
         else
         {
 
@@ -75,6 +64,7 @@ public class PtOneController : PtBaseController
         }
 
     }
+
 
     IEnumerator novaFase()
     {
@@ -140,20 +130,17 @@ public class PtOneController : PtBaseController
     }
 
 
-    void Shuffle()
+    void Shuffle(List<PluralItem> list)
     {
 
-        for (int i = 0; i < Itens.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            PluralItem temp = Itens[i];
-            int randomIndex = Random.Range(i, Itens.Count);
-            Itens[i] = Itens[randomIndex];
-            Itens[randomIndex] = temp;
+            PluralItem temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
 
         }
-
-        Itens = Itens.Take(12).ToList();
-
     }
 
     public void MostrarResponta()
@@ -161,8 +148,6 @@ public class PtOneController : PtBaseController
 
         txtResposta.text = currentItem.NomePlural;
         respostaRevelada = true;
-
-        focusInput();
 
     }
 
