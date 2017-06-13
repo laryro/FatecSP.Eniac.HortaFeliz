@@ -58,6 +58,30 @@ public class PtBaseController : MonoBehaviour
 
         Itens.Add(new PluralItem(10, "Pá", "Pás", Resources.Load<Sprite>("pa")));
 
+        Itens.Add(new PluralItem(11, "Ramo", "Ramos", Resources.Load<Sprite>("Ramo")));
+
+        Itens.Add(new PluralItem(12, "Cebolinha", "Cebolinhas", Resources.Load<Sprite>("cebolinha")));
+
+        Itens.Add(new PluralItem(13, "Alecrim", "Alecrins", Resources.Load<Sprite>("alecrim")));
+
+        Itens.Add(new PluralItem(14, "Hortelã", "Hortelãs", Resources.Load<Sprite>("hortela")));
+
+        Itens.Add(new PluralItem(15, "Folha", "Folhas", Resources.Load<Sprite>("hortela")));
+
+        Itens.Add(new PluralItem(16, "Garrafa", "Garrafas", Resources.Load<Sprite>("outra garrafa")));
+
+        Itens.Add(new PluralItem(17, "Feijão", "Feijões", Resources.Load<Sprite>("feijao")));
+
+        Itens.Add(new PluralItem(18, "Agrião", "Agriões", Resources.Load<Sprite>("agriao")));
+
+        Itens.Add(new PluralItem(19, "Broto", "Brotos", Resources.Load<Sprite>("broto_3")));
+
+        Itens.Add(new PluralItem(20, "Raiz", "Raizes", Resources.Load<Sprite>("raiz")));
+
+        Itens.Add(new PluralItem(21, "Lata", "Latas", Resources.Load<Sprite>("latinha")));
+
+        Itens.Add(new PluralItem(22, "Papel", "Papéis", Resources.Load<Sprite>("papel")));
+
         txtRecordista.text = "Recordista: " + PlayerPrefs.GetString("nomeVencedorPortugues") + " : " + PlayerPrefs.GetInt("pontuacaoMaximaPortugues") + " PTS";
 
     }
@@ -126,18 +150,6 @@ public class PtBaseController : MonoBehaviour
 
     }
 
-    public void Shuffle(List<Sprite> list)
-    {
-
-        for (int i = 0; i < list.Count; i++)
-        {
-            Sprite temp = list[i];
-            int randomIndex = Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
-
-        }
-    }
 
     public void ComputarPontos(int valor ) {
 

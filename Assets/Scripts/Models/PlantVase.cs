@@ -5,21 +5,24 @@ using UnityEngine.UI;
 
 public class PlantVase : PlantVaseController {
     private Seed seed;
-    private GameObject needsPanel;
-    private bool rightNeed;
-    private GameObject score;
+	private GameObject needsPanel, plantStage, score;
+    private bool rightNeed, careable;
     private int errorMod = 1;
 
 	private AudioSource audioPlayer;
 
 	public AudioClip clearAudio, scoreAudio, errorAudio;
+	public List<Sprite> plantStages;
     public List<GameObject> needsList;
 
     public new void Start(){
         base.Start();
+        careable = true;
 		audioPlayer = this.GetComponent<AudioSource>();
 
         needsPanel = gameObject.transform.Find("NeedsList").gameObject;
+        plantStage = gameObject.transform.Find("Plant").gameObject;
+        plantStage.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
 
         score = GameObject.Find("ScoreBlock").gameObject;
 
@@ -27,37 +30,42 @@ public class PlantVase : PlantVaseController {
         ShowNeeds();
     }
 
-    public void CheckNeeds(Seed.Needs care){
-        rightNeed = false;
+    public void CheckNeeds (Seed.Needs care)
+	{
+		rightNeed = false;
 
-        for( int i = 0; i < needsList.ToArray().Length; i++){
-            Need need = needsPanel.transform.GetChild(i).gameObject.GetComponent<Need>();
-            if ( need.type == care && !need.IsFullfilled() ){
-                need.SetFullfilled();
-                rightNeed = true;
-                // Soma pontos
-                score.GetComponent<ScoreController>().AddPoints(10);
-                errorMod = 1;
-                break;
-            }
-        }
-        // Se for o cuidado errado
-        if( !rightNeed)
-        {
-            // Desconta pontos
-            score.GetComponent<ScoreController>().SubtractPoints(errorMod);
-            errorMod++;
-			audioPlayer.PlayOneShot(errorAudio);
-        }
+		if (careable) {
+			for (int i = 0; i < needsList.ToArray ().Length; i++) {
+				Need need = needsPanel.transform.GetChild (i).gameObject.GetComponent<Need> ();
+				if (need.type == care && !need.IsFullfilled ()) {
+					need.SetFullfilled ();
+					rightNeed = true;
+					// Soma pontos
+					score.GetComponent<ScoreController> ().AddPoints (10);
+					plantStage.GetComponent<Image> ().sprite = plantStages [ 3 - RemainingNeeds()];
+					plantStage.GetComponent<Image> ().color = new Color (1f, 1f, 1f, 1f);
+					errorMod = 1;
+					break;
+				}
+			}
+			// Se for o cuidado errado
+			if (!rightNeed) {
+				// Desconta pontos
+				score.GetComponent<ScoreController> ().SubtractPoints (errorMod);
+				errorMod++;
+				audioPlayer.PlayOneShot (errorAudio);
+			}
 
-        // Checa se todos as necessidades foram preenchidas, remove e adiciona outro vaso no lugar
-		if (RemainingNeeds () == 0) {
-			score.GetComponent<ScoreController> ().AddPoints (100);
-			audioPlayer.PlayOneShot (clearAudio);
-			this.GetComponent<Image> ().color = new Color (1f, 1f, 1f, 0.3f);
-			StartCoroutine(WaitUpAndRenew (2));
-		} else if( rightNeed ) {
-			audioPlayer.PlayOneShot (scoreAudio);
+			// Checa se todos as necessidades foram preenchidas, remove e adiciona outro vaso no lugar
+			if (RemainingNeeds() == 0) {
+				score.GetComponent<ScoreController> ().AddPoints (100);
+				audioPlayer.PlayOneShot (clearAudio);
+				careable = false;
+				StartCoroutine( WaitUpAndDeactivate(3));
+				StartCoroutine (WaitUpAndRenew(5));
+			} else if (rightNeed) {
+				audioPlayer.PlayOneShot (scoreAudio);
+			}
 		}
     }
 
@@ -93,14 +101,21 @@ public class PlantVase : PlantVaseController {
         }
 
 		this.GetComponent<Image>().color = new Color(1f,1f,1f,1f);
+		plantStage.GetComponent<Image>().color = new Color (1f, 1f, 1f, 0f);
+
         seed = new Seed();
         ShowNeeds();
     }
 
+    private IEnumerator WaitUpAndDeactivate (int time){
+    	yield return new WaitForSeconds(time);
+    	this.GetComponent<Image> ().color = new Color (1f, 1f, 1f, 0.3f);
+		plantStage.GetComponent<Image>().color = new Color( 1f,1f,1f,0.3f);
+	}
 	private IEnumerator WaitUpAndRenew(int time){
 		yield return new WaitForSeconds(time);
 		RenewVase();
-		yield break;
+		careable = true;
 	}
 		
 }
