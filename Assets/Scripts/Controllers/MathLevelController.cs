@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MathLevelController : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class MathLevelController : MonoBehaviour
     private const int VLR_METAL = 4;
     private const int VLR_ORGANICO = 9;
     private const int MULTIPLICADOR_PONTOS = 50;
+    private bool enterUnlocked = true;
     private List<RecyclableItem> listaItens;
     private List<Int32> listaSelecionados;
     public InputField inputResultado, inputNomeVencedor;
@@ -48,6 +50,26 @@ public class MathLevelController : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+
+            if (grupoPreJogo.activeSelf == true && enterUnlocked == true)
+            {
+                TocarSequencia();
+                enterUnlocked = false;
+                Invoke("UnlockEnterKey", 1.0f);
+            }
+
+
+
+            if (grupoMostrarResultado.activeSelf == true && enterUnlocked == true)
+            {
+                NovaRodada();
+                enterUnlocked = false;
+                Invoke("UnlockEnterKey", 1.0f);
+            }
+
+        }
     }
 
     void OnDestroy()
@@ -71,6 +93,13 @@ public class MathLevelController : MonoBehaviour
         {
             MostrarResultado();
         }
+        /*
+        if (proximaRodada. && Input.GetKey(KeyCode.Return))
+        {
+            MostrarResultado();
+        }*/
+
+
     }
 
     /// <summary>
@@ -214,6 +243,7 @@ public class MathLevelController : MonoBehaviour
     {
         grupoTocarSequencia.SetActive(false);
         grupoAguardarResposta.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(inputResultado.gameObject, null);
     }
 
     /// <summary>
@@ -267,6 +297,8 @@ public class MathLevelController : MonoBehaviour
         mostraResultadoPainel.color = new Color(0.16f, 0.77f, 0.16f);
         proximaRodada.tag = "Ganhou";
         txtBtnProximaRodada.text = "Próxima Rodada";
+        enterUnlocked = false;
+        Invoke("UnlockEnterKey", 1.0f);
         GetComponent<AudioSource>().PlayOneShot(somAcerto);
         PlayerPrefs.SetInt("nivelMatematica", (PlayerPrefs.GetInt("nivelMatematica") + 1));
     }
@@ -275,6 +307,8 @@ public class MathLevelController : MonoBehaviour
     {
         mostraResultadoPainel.color = new Color(1f, 0.5f, 0.5f);
         GetComponent<AudioSource>().PlayOneShot(somErro);
+        enterUnlocked = false;
+        Invoke("UnlockEnterKey", 1.0f);
         proximaRodada.tag = "Perdeu";
         txtBtnProximaRodada.text = "Encerrar";
     }
@@ -339,4 +373,10 @@ public class MathLevelController : MonoBehaviour
         return PlayerPrefs.GetInt("nivelMatematica");
     }
 
+
+
+    public void UnlockEnterKey()
+    {
+        enterUnlocked = true;
+    }
 }

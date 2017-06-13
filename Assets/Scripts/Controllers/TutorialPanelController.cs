@@ -10,10 +10,12 @@ public class TutorialPanelController : MonoBehaviour
     public Text textoDescritivo;
 
     #region Matematica
-    public AudioClip somPapel, somPlastico, somMetal, somVidro, somOrganico,somDescoberta;
+    public AudioClip somPapel, somPlastico, somMetal, somVidro, somOrganico, somDescoberta;
     public SpriteRenderer spritePapel, spriteVidro, spritePlastico, spriteMetal, spriteOrganico;
     public Text textoPapel, textoVidro, textoPlastico, textoMetal, textoOrganico;
     public GameObject botaoPapel, botaoVidro, botaoPlastico, botaoMetal, botaoOrganico;
+    public GameObject groupAdvise, tutorialPanel, groupHome, groupSample, groupDemo, groupRecycable;
+    public Button botaoJogar;
     #endregion
 
     // Use this for initialization
@@ -31,7 +33,7 @@ public class TutorialPanelController : MonoBehaviour
             case "Matematica":
                 spriteMetal.enabled = spriteOrganico.enabled = spritePlastico.enabled = spritePapel.enabled = spriteVidro.enabled = false;
                 textoMetal.enabled = textoOrganico.enabled = textoPlastico.enabled = textoPapel.enabled = textoVidro.enabled = false;
-                botaoMetal.SetActive(false); botaoOrganico.SetActive(false); botaoPlastico.SetActive(false);botaoPapel.SetActive(false); botaoVidro.SetActive(false);
+                botaoMetal.SetActive(false); botaoOrganico.SetActive(false); botaoPlastico.SetActive(false); botaoPapel.SetActive(false); botaoVidro.SetActive(false);
                 CarregarTutorialMatematica();
                 break;
             case "Portugues":
@@ -58,7 +60,9 @@ public class TutorialPanelController : MonoBehaviour
     private void CarregarTutorialMatematica()
     {
         painel = new TutorialPanel();
-
+        //Esconde a demo
+        groupDemo.SetActive(false);
+        //groupRecycable.SetActive(true);
         #region SelecaoMensagem
         /*
          Nivel 0-5 : Papel e Plastico  | 3 segundos intervalo | pisca na tela | pisca item
@@ -69,25 +73,29 @@ public class TutorialPanelController : MonoBehaviour
          */
         switch (PlayerPrefs.GetInt("nivelMatematica"))
         {
-
+            default:
+                painel.MostraMetal = painel.MostraOrganico = painel.MostraPapel = painel.MostraVidro = painel.MostraPlastico = true;
+                ShowAdvise();
+                break;
             //Tutorial Vidro
             case 6:
+                groupSample.SetActive(true);
                 painel.TextoDescritivo = @"Você desbloqueou um novo item: Vidro.
-
 Tipos de vidro recicláveis : 
-
 Garrafas de sucos, refrigerantes, cervejas e outros tipos de bebidas;
 Potes de alimentos, Cacos de vidros, Frascos de remédios
 
 Preste atenção  no som do Vidro:
 			";
                 painel.MostraVidro = true;
+                tutorialPanel.SetActive(true);
                 GetComponent<AudioSource>().PlayOneShot(somDescoberta);
                 break;
             //Tutorial Metal
             case 11:
+                groupSample.SetActive(true);
+                tutorialPanel.SetActive(true);
                 painel.TextoDescritivo = @"Você desbloqueou um novo item: Metal.
-
 Tipos de metais recicláveis : Latas de alumínio (refrigerante, cerveja, etc.) e aco (latas de sardinha, molhos, óleo, etc.
 
 <b>O intervalo entre os sons ficará menor. Fique atento.
@@ -97,9 +105,9 @@ Preste atencao  no som do Metal:</b>
                 GetComponent<AudioSource>().PlayOneShot(somDescoberta);
                 break;
             case 21:
-                painel.TextoDescritivo = @"Você desbloqueou um novo item: Lixo Orgânico.
-Lixo orgânico é todo resíduo de origem vegetal ou animal, ou seja, todo lixo originário de um ser vivo. 
- 
+                groupSample.SetActive(true);
+                tutorialPanel.SetActive(true);
+                painel.TextoDescritivo = @"Você desbloqueou um novo item: Lixo Orgânico. 
 Podemos citar como exemplos de lixo orgânico: restos de alimentos orgânicos (carnes, vegetais, frutos, cascas de ovos), ossos, sementes, etc.
 
 A Partir de agora o jogo ficará muito mais difícil! 
@@ -108,33 +116,23 @@ A Partir de agora o jogo ficará muito mais difícil!
                 GetComponent<AudioSource>().PlayOneShot(somDescoberta);
                 painel.MostraOrganico = true;
                 break;
-            default:
-                painel.TextoDescritivo = @"Soma Musical
-Você ouvirá uma sequência de sons dos materiais recicláveis e cada um deles equivale a um número. 
-Após ouvir toda a sequência, você deverá responder qual é o resultado da soma correspondente aos sons ouvidos.
-Ex: Som de plastico = 1  , Som de papel = 3.
-
-Ao ouvir uma sequência com os dois sons, você deverá colocar o resultado: <b>4</b>
-Aproveite esse momento e ouça bem cada um dos sons antes de comecar o jogo.
-    Boa Sorte!
-";
-                painel.MostraMetal = painel.MostraOrganico = painel.MostraPapel = painel.MostraVidro = painel.MostraPlastico = true;
-                break;
+            
 
         }
         #endregion
         textoDescritivo.text = painel.TextoDescritivo;
-        spriteMetal.enabled = textoMetal.enabled =  painel.MostraMetal;
-        spriteOrganico.enabled = textoOrganico.enabled =  painel.MostraOrganico;
-        spritePlastico.enabled = textoPlastico.enabled =  painel.MostraPlastico;
-        spritePapel.enabled = textoPapel.enabled  = painel.MostraPapel;
-        spriteVidro.enabled = textoVidro.enabled  = painel.MostraVidro;
+        spriteMetal.enabled = textoMetal.enabled = painel.MostraMetal;
+        spriteOrganico.enabled = textoOrganico.enabled = painel.MostraOrganico;
+        spritePlastico.enabled = textoPlastico.enabled = painel.MostraPlastico;
+        spritePapel.enabled = textoPapel.enabled = painel.MostraPapel;
+        spriteVidro.enabled = textoVidro.enabled = painel.MostraVidro;
         botaoMetal.SetActive(painel.MostraMetal);
         botaoOrganico.SetActive(painel.MostraOrganico);
         botaoPlastico.SetActive(painel.MostraPlastico);
         botaoPapel.SetActive(painel.MostraPapel);
         botaoVidro.SetActive(painel.MostraVidro);
     }
+
 
     //Toca o audio de cada som Solicitado
     public void TocarSom(string nomeSom)
@@ -158,6 +156,42 @@ Aproveite esse momento e ouça bem cada um dos sons antes de comecar o jogo.
                 GetComponent<AudioSource>().PlayOneShot(somOrganico);
                 break;
         }
+    }
+
+    public void ShowAdvise()
+    {
+        tutorialPanel.SetActive(false);
+        groupAdvise.SetActive(true);
+    }
+
+    public void ShowTutorialFirstStep()
+    {
+        groupAdvise.SetActive(false);
+        tutorialPanel.SetActive(true);
+        groupHome.SetActive(true);
+        groupRecycable.SetActive(false);
+        textoDescritivo.text = @"Nome do Jogo : Soma Musical
+
+Você ouvirá uma sequência de sons dos materiais recicláveis. 
+Cada um deles equivale a um número. 
+
+Após ouvir toda a sequência de sons, você deverá responder qual é o resultado da soma correspondente aos sons ouvidos.";
+    }
+
+    public void ShowTutorialSample()
+    {
+        groupHome.SetActive(false);
+        tutorialPanel.SetActive(true);
+        groupSample.SetActive(true);
+        groupDemo.SetActive(true);
+        groupRecycable.SetActive(true);
+        botaoJogar.enabled = true;
+        textoDescritivo.text = @"Exemplo
+Som de papel = 3                 Som de plastico = 1                   
+
+ 
+Aproveite esse momento e ouça bem cada um dos sons antes de comecar o jogo.
+    Boa Sorte!";
     }
 
 

@@ -10,7 +10,7 @@ public class MathLevel
     private float intervaloSons;
     private bool piscarItemReciclavel, piscarIconeSom;
     private const int MIN_QTD_SEQ = 2;
-    private const int QTD_FASE_INCREMENTO_SEQ = 5;
+    private const int QTD_FASE_INCREMENTO_SEQ = 3;
 
     public MathLevel(int fase)
     {
@@ -76,7 +76,7 @@ public class MathLevel
         }
         else
         {
-            intervaloSons = 1.3f;
+            intervaloSons = 1.4f;
         }
     }
     public void SetPiscarItemReciclavel(int fase)
