@@ -40,10 +40,18 @@ public class PtOneController : PtBaseController
 
         IniciarJogadaGame();
 
+        focusInput();
 
     }
 
+    private void focusInput() {
+        #region Focus
+        InputField.Select();
 
+        InputField.ActivateInputField();
+        #endregion
+
+    }
 
     public void proximoJogo() {
 
@@ -51,8 +59,11 @@ public class PtOneController : PtBaseController
 
         grupoMostrarResultado.SetActive(false);
 
-        if(Itens.Any())
-        IniciarJogadaGame();
+        if (Itens.Any()) {
+            
+                IniciarJogadaGame();
+                focusInput();
+            }
         else
         {
 
@@ -64,7 +75,6 @@ public class PtOneController : PtBaseController
         }
 
     }
-
 
     IEnumerator novaFase()
     {
@@ -148,6 +158,8 @@ public class PtOneController : PtBaseController
 
         txtResposta.text = currentItem.NomePlural;
         respostaRevelada = true;
+
+        focusInput();
 
     }
 
