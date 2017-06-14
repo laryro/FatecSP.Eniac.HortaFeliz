@@ -82,6 +82,14 @@ public class PtBaseController : MonoBehaviour
 
         Itens.Add(new PluralItem(22, "Papel", "Papéis", Resources.Load<Sprite>("papel")));
 
+        Itens.Add(new PluralItem(23, "Girasol", "Girassóis", Resources.Load<Sprite>("sunflower")));
+
+        Itens.Add(new PluralItem(24, "Couve-flor", "Couves-Flores", Resources.Load<Sprite>("couveflor")));
+
+
+
+
+
 
         txtRecordista.text = "Recordista: " + PlayerPrefs.GetString("nomeVencedorPortugues") + " : " + PlayerPrefs.GetInt("pontuacaoMaximaPortugues") + " PTS";
 

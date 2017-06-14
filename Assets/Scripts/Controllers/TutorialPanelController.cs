@@ -179,10 +179,10 @@ A Partir de agora o jogo ficará muito mais difícil!
         textoDescritivo.text = @"Nome do Jogo : Jogo dos Plurais
 
 A cada plural acertado você ganha pontos !!!!
-Uma tentiva  = 10 Pontos
-Duas Tentaivas  = 5 Pontos
-Três tentativas = 2 Pontos
-Quatro em diante  = 1 Ponto
+Uma Tentativa  = 10 Pontos
+Duas Tentativas  = 5 Pontos
+Três Tentativas = 2 Pontos
+Quatro Tentativas em diante  = 1 Ponto
 Caso você precise de ajuda click em ver resposta.
 Mas Atenção ao ver as respontas você não ganhará pontos.";
     }
