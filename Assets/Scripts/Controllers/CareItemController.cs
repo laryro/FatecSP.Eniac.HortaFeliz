@@ -5,13 +5,11 @@ using UnityEngine.EventSystems;
 
 public class CareItemController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Transform positionToReturnTo = null;
     GameObject draggableShadow = null;
 
     public void Start()
     {
         draggableShadow = gameObject.transform.GetChild(0).gameObject;
-        positionToReturnTo = gameObject.transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -25,6 +23,6 @@ public class CareItemController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         this.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        draggableShadow.transform.position = positionToReturnTo.position;
+        draggableShadow.transform.position = gameObject.transform.position;
     }
 }

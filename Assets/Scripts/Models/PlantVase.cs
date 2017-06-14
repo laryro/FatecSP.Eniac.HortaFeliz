@@ -83,6 +83,10 @@ public class PlantVase : PlantVaseController {
     }
     private void ShowNeeds(){
         Seed.Needs[] needs = seed.GetNeeds().ToArray();
+        Vector2 needsSize = needsPanel.GetComponent<RectTransform>().sizeDelta;
+        needsSize.x = (Screen.width / needsSize.x) * 2.7f;
+        needsSize.y = needsSize.x;
+        
         for (int i = 0; i < needs.Length; i++)
         {
 			GameObject nu = (GameObject) Instantiate(needsList[i], needsPanel.transform.position, needsPanel.transform.rotation);
@@ -90,7 +94,8 @@ public class PlantVase : PlantVaseController {
             needsList[i].GetComponent<Need>().type = needs[i];
             nu.GetComponent<Need>().type = needs[i];
             nu.GetComponent<Need>().SetSprite(Resources.Load<Sprite>("Science/" + needs[i].ToString()) );
-			nu.transform.SetParent( needsPanel.transform );
+            nu.GetComponent<RectTransform>().sizeDelta = needsSize;
+            nu.transform.SetParent( needsPanel.transform );
         }
     }
 
