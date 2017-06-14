@@ -165,20 +165,29 @@ public class PtTwoController : PtBaseController
             countCorrectGuesses++;
 
         }
-        else
-        {
-            CarregaErro(true);
-        }
 
 
         StartCoroutine(Tempo());
 
     }
 
+    public void Shuffle(List<Sprite> list)
+    {
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            Sprite temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+
+        }
+    }
+
 
     IEnumerator Tempo()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         ProximoJogo();
 

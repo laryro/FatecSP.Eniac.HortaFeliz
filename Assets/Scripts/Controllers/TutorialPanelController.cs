@@ -37,7 +37,7 @@ public class TutorialPanelController : MonoBehaviour
                 CarregarTutorialMatematica();
                 break;
             case "Portugues":
-                // Not developed yet.
+               CarregarTutorialPortugues();
                 break;
             default:
                 print("Painel sem Tag de Tema");
@@ -57,7 +57,13 @@ public class TutorialPanelController : MonoBehaviour
 
     }
 
-    private void CarregarTutorialMatematica()
+
+    private void CarregarTutorialPortugues()
+    {
+        ShowTutorialPtStep();
+    }
+
+        private void CarregarTutorialMatematica()
     {
         painel = new TutorialPanel();
         //Esconde a demo
@@ -162,6 +168,23 @@ A Partir de agora o jogo ficará muito mais difícil!
     {
         tutorialPanel.SetActive(false);
         groupAdvise.SetActive(true);
+    }
+
+
+
+    public void ShowTutorialPtStep()
+    {
+        tutorialPanel.SetActive(true);
+        groupHome.SetActive(true);
+        textoDescritivo.text = @"Nome do Jogo : Jogo dos Plurais
+
+A cada plural acertado você ganha pontos !!!!
+Uma tentiva  = 10 Pontos
+Duas Tentaivas  = 5 Pontos
+Três tentativas = 2 Pontos
+Quatro em diante  = 1 Ponto
+Caso você precise de ajuda click em ver resposta.
+Mas Atenção ao ver as respontas você não ganhará pontos.";
     }
 
     public void ShowTutorialFirstStep()
