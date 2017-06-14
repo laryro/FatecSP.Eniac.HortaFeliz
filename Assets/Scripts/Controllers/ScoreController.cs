@@ -22,4 +22,9 @@ public class ScoreController : MonoBehaviour {
     {
         actualScore -= 5 * val;
     }
+
+    public int GetScore()
+    {
+        return actualScore;
+    }
 }
