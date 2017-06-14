@@ -76,7 +76,7 @@ public class PtBaseController : MonoBehaviour
 
         Itens.Add(new PluralItem(19, "Broto", "Brotos", Resources.Load<Sprite>("broto_3")));
 
-        Itens.Add(new PluralItem(20, "Raiz", "Raizes", Resources.Load<Sprite>("raiz")));
+        Itens.Add(new PluralItem(20, "Raiz", "Raízes", Resources.Load<Sprite>("raiz")));
 
         Itens.Add(new PluralItem(21, "Lata", "Latas", Resources.Load<Sprite>("latinha")));
 
