@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FatecSP.Eniac.HortaFeliz", "FatecSP.Eniac.HortaFeliz.csproj", "{11A4A266-1FDD-92C6-6AB8-86E58003B9F7}"
 EndProject
 Global
