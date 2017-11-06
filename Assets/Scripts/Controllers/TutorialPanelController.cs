@@ -37,7 +37,7 @@ public class TutorialPanelController : MonoBehaviour
                 CarregarTutorialMatematica();
                 break;
             case "Portugues":
-               CarregarTutorialPortugues();
+               CarregarTutorialMemoryGame();
                 break;
             default:
                 print("Painel sem Tag de Tema");
@@ -58,12 +58,12 @@ public class TutorialPanelController : MonoBehaviour
     }
 
 
-    private void CarregarTutorialPortugues()
+    private void CarregarTutorialMemoryGame()
     {
-        ShowTutorialPtStep();
+        ShowTutorialMemoryGameStep();
     }
 
-        private void CarregarTutorialMatematica()
+    private void CarregarTutorialMatematica()
     {
         painel = new TutorialPanel();
         //Esconde a demo
@@ -172,19 +172,17 @@ A Partir de agora o jogo ficará muito mais difícil!
 
 
 
-    public void ShowTutorialPtStep()
+    public void ShowTutorialMemoryGameStep()
     {
         tutorialPanel.SetActive(true);
         groupHome.SetActive(true);
-        textoDescritivo.text = @"Nome do Jogo : Jogo dos Plurais
+        textoDescritivo.text = @"MEMORY GAME
 
-A cada plural acertado você ganha pontos !!!!
-Uma Tentativa  = 10 Pontos
-Duas Tentativas  = 5 Pontos
-Três Tentativas = 2 Pontos
-Quatro Tentativas em diante  = 1 Ponto
-Caso você precise de ajuda click em ver resposta.
-Mas Atenção ao ver as respontas você não ganhará pontos.";
+        VAMOS APRENDER A JOGAR? 
+        CLIQUE NAS CARTAS E TENTE ACERTAR
+        A COMBINAÇÃO DE IMAGENS E LETRAS,
+        COMO NA FIGURA ABAIXO.
+        VAMOS LÁ???";
     }
 
     public void ShowTutorialFirstStep()
